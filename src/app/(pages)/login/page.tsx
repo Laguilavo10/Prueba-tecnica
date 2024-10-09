@@ -4,17 +4,21 @@ import { Button } from '@components/ui/button'
 import { Input } from '@components/ui/input'
 import { Label } from '@components/ui/label'
 import { toast } from 'sonner'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
+  const router = useRouter()
   const validateLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = new FormData(e.currentTarget)
     const email = form.get('email') as string
     const password = form.get('password') as string
     try {
-      const data = await conn.post('/user/validate', { email, password })
-      console.log(data)
+      const data = await conn.post<Record<'token', string>>('/user/validate', { email, password })
+      Cookies.set('Token', data?.data?.token)
       toast.success('Bienvenido')
+      router.push('/proyectos')
     } catch (error) {
       console.log(error)
       toast.error('Usuario o contraseña incorrectos')
