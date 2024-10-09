@@ -6,19 +6,38 @@ import {
   CardHeader,
   CardTitle
 } from '@components/ui/card'
-import { Button } from '@components/ui/button'
+import { buttonVariants } from '@components/ui/button'
+import type { Project } from '@/types/projects'
+import { formatDate } from '@/lib/formatDate'
+import Link from 'next/link'
 
-export default function ProjectCard() {
+export default function ProjectCard({ project }: { project: Project }) {
+  const {
+    nombre: name,
+    descripcion: description,
+    fecha_inicio: startDate,
+    fecha_finalizacion: endDate,
+    id
+  } = project
   return (
     <Card className='w-auto'>
       <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
+        <CardTitle>{name}</CardTitle>
+        <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent></CardContent>
       <CardFooter className='flex justify-between'>
-        <Button variant='outline'>Cancel</Button>
-        <Button>Deploy</Button>
+        <small className='italic'>
+          <time>
+            {formatDate(startDate)} / {formatDate(endDate)}
+          </time>
+        </small>
+        <Link
+          className={buttonVariants({ variant: 'secondary' })}
+          href={`/projects/${id}`}
+        >
+          Ver
+        </Link>
       </CardFooter>
     </Card>
   )

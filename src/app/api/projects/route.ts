@@ -2,24 +2,8 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/app/prisma'
 import type { NewProject } from '@/types/projects'
 
-export const GET = async (req: Request) => {
-  const url = new URL(req.url)
-  const params = url.searchParams
-
-  const projectId = params.get('project_id')
-
-  if (projectId === null || projectId === '') {
-    return NextResponse.json(
-      { message: 'Project ID is required' },
-      { status: 400 }
-    )
-  }
-
-  const data = prisma.tarea.findMany({
-    where: {
-      proyecto_id: Number(projectId)
-    }
-  })
+export const GET = async () => {
+  const data = await prisma.proyecto.findMany()
   return NextResponse.json({ data })
 }
 
@@ -39,7 +23,10 @@ export const POST = async (req: Request) => {
     console.log(data)
   } catch (error) {
     console.log(error)
-    return NextResponse.json({ message: 'Error creating project' }, { status: 500 })
+    return NextResponse.json(
+      { message: 'Error creating project' },
+      { status: 500 }
+    )
   }
 
   return NextResponse.json({ data: 'SS' })
