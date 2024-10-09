@@ -1,0 +1,25 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@components/ui/card'
+import { PlusCircledIcon } from '@radix-ui/react-icons'
+
+export default function CreateProjectCard() {
+  return (
+    <Card className='w-auto border-dashed cursor-pointer border-yellow-400' >
+      <CardHeader>
+        <CardTitle>Crear Nuevo Proyecto</CardTitle>
+        <CardDescription>
+          Haz clic aquí para agregar un nuevo proyecto. ¡Empieza a organizar tus tareas y colabora con
+          tu equipo!
+        </CardDescription>
+      </CardHeader>
+      <CardContent className='flex justify-center items-center  '>
+        <PlusCircledIcon className='size-12' />
+      </CardContent>
+    </Card>
+  )
+}

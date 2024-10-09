@@ -55,6 +55,9 @@ const config: Config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
+      },
+      gridTemplateColumns: {
+        'auto-fit': 'repeat(auto-fit, minmax(350px, 1fr))'
       }
     }
   },
