@@ -34,7 +34,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </small>
         <Link
           className={buttonVariants({ variant: 'secondary' })}
-          href={`/projects/${id}`}
+          href={`/proyectos/${id}`}
         >
           Ver
         </Link>
