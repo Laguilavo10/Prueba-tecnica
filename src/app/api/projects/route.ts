@@ -7,7 +7,9 @@ export const GET = async (req: Request) => {
   const cookies = req.headers.get('cookie')
   const token = cookies?.split('=')[1] ?? ''
   const decodedPayload = decodeJWT(token)
-  console.log(token, decodedPayload)
+  console.log('cookies', cookies)
+  console.log('token', token)
+  console.log('decodePayload', decodedPayload)
   let data
   if (decodedPayload?.rol === 'ADMIN') {
     data = await prisma.proyecto.findMany()
