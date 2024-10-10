@@ -35,6 +35,7 @@ export const POST = async (req: Request) => {
       }
     })
     console.log(data)
+    return NextResponse.json({ data })
   } catch (error) {
     console.log(error)
     return NextResponse.json(
@@ -42,6 +43,4 @@ export const POST = async (req: Request) => {
       { status: 500 }
     )
   }
-
-  return NextResponse.json({ data: 'SS' })
 }

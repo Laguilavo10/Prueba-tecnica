@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/app/prisma'
 
-
 export const PATCH = async (req: Request) => {
   const reqJSON = await req.json()
   const url = new URL(req.url)
@@ -16,6 +15,5 @@ export const PATCH = async (req: Request) => {
       estado: status
     }
   })
-  console.log(data)
   return NextResponse.json({ data })
 }
