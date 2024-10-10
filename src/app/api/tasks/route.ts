@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/app/prisma'
 import { decodeJWT } from '@/lib/decodeJWT'
+import { cookies } from 'next/headers'
 
 export const GET = async (req: Request) => {
   const url = new URL(req.url)
@@ -15,8 +16,14 @@ export const GET = async (req: Request) => {
     )
   }
 
-  const cookies = req.headers.get('cookie')
-  const token = cookies?.split('=')[1] ?? ''
+  const token = cookies().get('Token')?.value 
+
+  if (!token) { 
+    return NextResponse.json(
+      { message: 'Token is required' },
+      { status: 400 }
+    )
+  }
   const decodedPayload = decodeJWT(token)
 
   let data

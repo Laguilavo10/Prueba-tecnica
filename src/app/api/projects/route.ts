@@ -2,14 +2,19 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/app/prisma'
 import type { NewProject } from '@/types/projects'
 import { decodeJWT } from '@/lib/decodeJWT'
+import { cookies } from 'next/headers'
 
 export const GET = async (req: Request) => {
-  const cookies = req.headers.get('cookie')
-  const token = cookies?.split('=')[1] ?? ''
+  const token = cookies().get('Token')?.value 
+
+  if (!token) { 
+    return NextResponse.json(
+      { message: 'Token is required' },
+      { status: 400 }
+    )
+  }
+
   const decodedPayload = decodeJWT(token)
-  console.log('cookies', cookies)
-  console.log('token', token)
-  console.log('decodePayload', decodedPayload)
   let data
   if (decodedPayload?.rol === 'ADMIN') {
     data = await prisma.proyecto.findMany()
@@ -24,7 +29,7 @@ export const GET = async (req: Request) => {
     })
 
     // Obtener los IDs de los proyectos de las tareas asignadas
-    const proyectoIds = tareas.map(tarea => tarea.proyecto_id)
+    const proyectoIds = tareas.map((tarea) => tarea.proyecto_id)
 
     // Obtener los proyectos correspondientes a esos IDs
     data = await prisma.proyecto.findMany({
