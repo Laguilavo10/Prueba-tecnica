@@ -29,11 +29,10 @@ export default function ProjectId({ params }: { params: { id: string } }) {
       setProject(response.data.data)
     })
   }, [])
-  console.log('project', project)
   return (
     <>
       <Header />
-      <section className='w-[1200px] m-auto flex flex-col gap-10 my-10'>
+      <section className='max-w-[1200px] m-auto flex flex-col gap-10 my-10 px-10'>
         <div className='flex justify-between'>
           <h2 className='font bold text-xl'>
             Proyecto #{id}:{' '}

@@ -15,11 +15,11 @@ import { useState } from 'react'
 import { conn } from '@/lib/connection'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
+import type { User } from '@components/shared/Header'
 
-export default function TaskRow({ row }: { row: Task }) {
+export default function TaskRow({ row, users }: { row: Task, users: User[] }) {
   const [status, setStatus] = useState(row.estado)
   const optionStatus = Object.values(Status)
-
   const handleStatusChange = async (value: Status) => {
     try {
       await conn.patch(`/tasks/${row.id}`, { status: value })
@@ -57,7 +57,9 @@ export default function TaskRow({ row }: { row: Task }) {
           </SelectContent>
         </Select>
       </TableCell>
-      <TableCell className='text-center'>{row.asignada_a}</TableCell>
+      <TableCell className='text-center'>
+        {users.find((user) => user.id === row.asignada_a)?.nombre}
+      </TableCell>
     </TableRow>
   )
 }
