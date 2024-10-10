@@ -20,9 +20,7 @@ export default function Projects() {
       <div className='max-w-[1500px] m-auto my-10 p-10 flex flex-col gap-5 '>
         <h2 className='font-bold text-2xl'>Tus Proyectos</h2>
         <div className='grid grid-cols-auto-fit gap-5 '>
-          <NewProjectForm>
-            <CreateProjectCard />
-          </NewProjectForm>
+          <CreateProjectCard />
           {projects.length === 0 && (
             <p className='text-center font-bold text-xl'>
               No Tienes Proyectos activos

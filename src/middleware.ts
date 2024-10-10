@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { jwtVerify } from 'jose'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'

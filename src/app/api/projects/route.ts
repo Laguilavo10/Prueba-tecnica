@@ -12,9 +12,24 @@ export const GET = async (req: Request) => {
   if (decodedPayload.rol === 'ADMIN') {
     data = await prisma.proyecto.findMany()
   } else {
+    const tareas = await prisma.tarea.findMany({
+      where: {
+        asignada_a: decodedPayload.id
+      },
+      select: {
+        proyecto_id: true
+      }
+    })
+
+    // Obtener los IDs de los proyectos de las tareas asignadas
+    const proyectoIds = tareas.map(tarea => tarea.proyecto_id)
+
+    // Obtener los proyectos correspondientes a esos IDs
     data = await prisma.proyecto.findMany({
       where: {
-        usuario_id: decodedPayload.id
+        id: {
+          in: proyectoIds
+        }
       }
     })
   }

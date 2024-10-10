@@ -13,7 +13,7 @@ export const POST = async (req: Request) => {
       { status: 400 }
     )
   }
-  const encryptedPassword = await bcrypt.hash(dataJSON.password, 8)
+  const encryptedPassword = await bcrypt.hash(dataJSON.password as string, 8)
   console.log(encryptedPassword)
   const data = await prisma.usuario.findUnique({
     where: {
@@ -25,7 +25,7 @@ export const POST = async (req: Request) => {
     return NextResponse.json({ message: 'User not found' }, { status: 404 })
   }
 
-  const passwordMatch = await bcrypt.compare(dataJSON.password, data.contrasena)
+  const passwordMatch = await bcrypt.compare(dataJSON.password as string, data.contrasena)
 
   if (!passwordMatch) {
     return NextResponse.json({ message: 'User not found' }, { status: 404 })
@@ -38,6 +38,6 @@ export const POST = async (req: Request) => {
     },
     process.env.JWT_SIGN as string
   )
-
+  console.log(token)
   return NextResponse.json({ token })
 }
