@@ -42,7 +42,9 @@ export default function NewProjectForm({
   }
   return (
     <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger asChild>
+        <div>{children}</div>
+      </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
         <form onSubmit={handleSubmitProject}>
           <DialogHeader>

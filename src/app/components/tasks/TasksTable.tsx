@@ -15,8 +15,7 @@ const headers = [
   'Nombre',
   'Descripción',
   'Estado',
-  'Asignado a',
-  // 'Opciones'
+  'Asignado a'
 ]
 export function TasksTable({ data }: { data: Task[] }) {
   return (

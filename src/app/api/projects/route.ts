@@ -1,9 +1,23 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/app/prisma'
 import type { NewProject } from '@/types/projects'
+import { decodeJWT } from '@/lib/decodeJWT'
 
-export const GET = async () => {
-  const data = await prisma.proyecto.findMany()
+export const GET = async (req: Request) => {
+  const cookies = req.headers.get('cookie')
+  const token = cookies?.split('=')[1] ?? ''
+  const decodedPayload = decodeJWT(token)
+
+  let data
+  if (decodedPayload.rol === 'ADMIN') {
+    data = await prisma.proyecto.findMany()
+  } else {
+    data = await prisma.proyecto.findMany({
+      where: {
+        usuario_id: decodedPayload.id
+      }
+    })
+  }
   return NextResponse.json({ data })
 }
 
