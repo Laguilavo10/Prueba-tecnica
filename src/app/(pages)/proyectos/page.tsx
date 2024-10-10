@@ -4,6 +4,7 @@ import type { Project } from '@/types/projects'
 import CreateProjectCard from '@components/projects/CreateProjectCard'
 import NewProjectForm from '@components/projects/NewProjectForm'
 import ProjectCard from '@components/projects/ProjectCard'
+import Header from '@components/shared/Header'
 import { useEffect, useState } from 'react'
 
 export default function Projects() {
@@ -14,21 +15,24 @@ export default function Projects() {
     })
   }, [])
   return (
-    <div className='max-w-[1500px] m-auto my-10 p-10 flex flex-col gap-5 '>
-      <h2 className='font-bold text-2xl'>Tus Proyectos</h2>
-      <div className='grid grid-cols-auto-fit gap-5 '>
-        <NewProjectForm>
-          <CreateProjectCard />
-        </NewProjectForm>
-        {projects.length === 0 && (
-          <p className='text-center font-bold text-xl'>
-            No Tienes Proyectos activos
-          </p>
-        )}
-        {projects.map((item, index) => (
-          <ProjectCard key={index} project={item} />
-        ))}
+    <>
+      <Header />
+      <div className='max-w-[1500px] m-auto my-10 p-10 flex flex-col gap-5 '>
+        <h2 className='font-bold text-2xl'>Tus Proyectos</h2>
+        <div className='grid grid-cols-auto-fit gap-5 '>
+          <NewProjectForm>
+            <CreateProjectCard />
+          </NewProjectForm>
+          {projects.length === 0 && (
+            <p className='text-center font-bold text-xl'>
+              No Tienes Proyectos activos
+            </p>
+          )}
+          {projects.map((item, index) => (
+            <ProjectCard key={index} project={item} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
