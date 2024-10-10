@@ -2,7 +2,6 @@
 import { conn } from '@/lib/connection'
 import type { Project } from '@/types/projects'
 import CreateProjectCard from '@components/projects/CreateProjectCard'
-import NewProjectForm from '@components/projects/NewProjectForm'
 import ProjectCard from '@components/projects/ProjectCard'
 import Header from '@components/shared/Header'
 import { useEffect, useState } from 'react'
