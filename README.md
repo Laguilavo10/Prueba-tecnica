@@ -51,4 +51,5 @@ Debido al tiempo de la prueba, quedan muchas opciones de mejora, entre ellos:
 
 - Mejorar tiempos de carga
 - Añadir mejores loaders para mejorar la UI/UX
-- Utilizar una arquitectura 
+- Utilizar una arquitectura
+- Agregar la funcionalidad de añadir más usuarios
