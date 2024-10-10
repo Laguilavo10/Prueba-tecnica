@@ -7,7 +7,7 @@ import type { Rol } from '@prisma/client'
 import { Separator } from '@components/ui/separator'
 import LogoutButton from './LogoutButton'
 
-interface User {
+export interface User {
   id: number
   nombre: string
   email: string

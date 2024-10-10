@@ -47,7 +47,7 @@ export const POST = async (req: Request) => {
       descripcion: description as string,
       estado: 'PENDIENTE',
       proyecto_id: projectId as number,
-      asignada_a: assignedTo as number
+      asignada_a: Number(assignedTo)
     }
   })
 

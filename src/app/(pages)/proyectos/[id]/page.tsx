@@ -41,7 +41,7 @@ export default function ProjectId({ params }: { params: { id: string } }) {
           </h2>
           <OptionsButtonsProjects project={project} setProject={setProject} />
         </div>
-        <TasksTable data={tasks ?? []} />
+        <TasksTable data={tasks ?? []} projectId={Number(id)} setTasks={setTasks}/>
       </section>
     </>
   )
