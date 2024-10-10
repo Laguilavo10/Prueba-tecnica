@@ -16,13 +16,10 @@ export const GET = async (req: Request) => {
     )
   }
 
-  const token = cookies().get('Token')?.value 
+  const token = cookies().get('Token')?.value
 
-  if (!token) { 
-    return NextResponse.json(
-      { message: 'Token is required' },
-      { status: 400 }
-    )
+  if (token === undefined) {
+    return NextResponse.json({ message: 'Token is required' }, { status: 400 })
   }
   const decodedPayload = decodeJWT(token)
 
