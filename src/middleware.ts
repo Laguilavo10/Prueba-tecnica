@@ -8,6 +8,10 @@ export async function middleware(request: Request) {
   const token = cookies().get('Token')
 
   const jwtKey = new TextEncoder().encode(process.env.JWT_SIGN)
+
+  if (url.pathname === '/') {
+    return NextResponse.redirect(new URL('/proyectos', request.url).toString())
+  }
   if (url.pathname === '/login') {
     if (token) {
       try {
